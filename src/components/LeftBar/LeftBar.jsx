@@ -17,6 +17,10 @@ const LeftBar = () => {
             <span>Messages</span>
             </li>
             <li>
+            <ModeNightOutlinedIcon/>
+            <span>Theme</span>
+            </li>
+            <li>
             <Person2Icon/>
             <span>Profile</span>
             </li>

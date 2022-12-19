@@ -1,6 +1,9 @@
 .leftbar{
     padding-left: 17%;
     flex: 2;
+    position: sticky;
+    top: 30px;
+    height: calc(100vh - 70px);
     ul{
         list-style-type: none;
         padding-top: 20px;
@@ -8,6 +11,9 @@
             padding: 15px;
             gap: 50px;
             font-weight: 800;
+            span{
+                padding-left: 10px;
+            }
             
             button{
                 padding: 15px;
