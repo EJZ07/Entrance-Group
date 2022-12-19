@@ -1,0 +1,19 @@
+$themes:(
+    light:(
+        tectcolor:#000,
+        bg: white,
+        logo: black,
+        bgSoft: #f6f3f3,
+        textColorSofrt: #555,
+        border: lightgray,
+    ),
+    dark:(
+        tectcolor:#fff,
+        bg: #222,
+        logo: white,
+        bgSoft: #333,
+        textColorSofrt: lightgray,
+        border: #444,
+    ),
+);
+
