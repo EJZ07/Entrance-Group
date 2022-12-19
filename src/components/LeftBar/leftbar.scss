@@ -1,0 +1,33 @@
+.leftbar{
+    ul{
+        list-style-type: none;
+
+        button{
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            background-color: dodgerblue;
+        }
+
+        .user{
+            display: flex;
+            align-items: center;
+            padding-top: 40%;
+            gap: 10px;
+            font-weight: 500;
+            img{
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            span{
+
+            }
+        }
+    }
+    
+
+}
