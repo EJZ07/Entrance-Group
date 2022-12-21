@@ -1,25 +1,32 @@
+@import "../../style.scss";
 .NavBar{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    padding-bottom: 25px;
-    height: 28px;
-    border-bottom: 1px solid lightgrey;
-    position: sticky;
-    top: 0;
-    background: rgba(255, 255, 255, 0.6);
-    .left{
+    @include themify($themes){
         display: flex;
-        gap: 30px;
-        span{
-            opacity: 1;
-            font-weight: bold;
-            font-size: 30px;
+        justify-content: space-between;
+        padding: 10px 20px;
+        padding-bottom: 25px;
+        height: 28px;
+        border-bottom: 1px solid lightgrey;
+        position: sticky;
+        top: 0;
+        background: themed("bg");
+        border-left: 1.2px solid lightgrey;
+        border-right: 1.2px solid lightgrey;
+        .left{
+            display: flex;
+            gap: 30px;
+            span{
+                color: themed("textColorSofrt");
+                opacity: 1;
+                font-weight: bold;
+                font-size: 30px;
+            }
+
         }
 
-    }
+        .right{
 
-    .right{
-
+        }
     }
+    
 }

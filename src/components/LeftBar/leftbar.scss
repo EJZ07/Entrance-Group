@@ -14,16 +14,27 @@
             span{
                 padding-left: 10px;
             }
-            
-            button{
-                padding: 15px;
-                border: none;
-                border-radius: 25px;
-                color: white;
-                font-weight: bold;
-                width: 80%;
-                background-color: dodgerblue;
+
+            .nonTweet{
+                    display: flex;
+                    align-items: center;
+                    padding: 15px;
+                    border: none;
+                    border-radius: 25px;
             }
+            
+            .tweet{
+                button{
+                    padding: 15px;
+                    border: none;
+                    border-radius: 25px;
+                    color: white;
+                    font-weight: bold;
+                    width: 80%;
+                    background-color: dodgerblue;
+                }
+            }
+            
     
             .user{
                 display: flex;
