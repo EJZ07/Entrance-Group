@@ -8,10 +8,24 @@ const Navbar = () => {
 
     const {toggle} = useContext(DarkModeContext);
     const location = useLocation();
+    var path = location.pathname;
+    const pathArray = path.split("/");
+
+    function renderSwitch(param) {
+        switch(param) {
+          case '':
+            return 'Home';
+          case 'profile':
+            return 'Profile';
+          default:
+            return 'Thread';
+        }
+      }
+
     return (
         <div className="NavBar">
             <div className="left">
-                <span>{location.pathname[1]==":" ? "Thread" : "Home"}</span>
+                <span>{renderSwitch(pathArray[1])}</span>
             </div>
             <div className="right">
                 <AutoAwesomeOutlinedIcon/>

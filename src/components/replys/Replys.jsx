@@ -70,7 +70,7 @@ const Replys = () => {
                 <div className="content">
                 <p>{reply.desc}</p>
                 <img src={reply.img} alt=""/>
-                {replyOpen && <Replys />}
+                
             </div>
             </Link>
         <div className="info">
@@ -116,7 +116,7 @@ const Replys = () => {
 
             </div>
         </div>
-            
+            {replyOpen && <Replys />}
         </div>
         
     </div>       

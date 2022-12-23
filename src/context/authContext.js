@@ -13,6 +13,9 @@ export const AuthContextProvider = ({children}) =>{
         setCurrentUser({
             id:1, 
             name:"Gin Freecs", 
+            bio:"the One Piece is Real",
+            followers:20,
+            following:1000,
             profilePic:"https://sportshub.cbsistatic.com/i/2022/11/15/82c5a65f-9edc-434d-9265-4f39aac44912/spy-x-family-71-anya-hostage-crisis-twist-manga.jpg",
         });
     }; 

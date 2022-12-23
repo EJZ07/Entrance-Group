@@ -7,6 +7,7 @@ import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { AuthContext } from "../../context/authContext";
+import { Link } from "react-router-dom";
 
 const LeftBar = () => {
     const {toggle, darkMode} = useContext(DarkModeContext);
@@ -16,8 +17,14 @@ const LeftBar = () => {
         <ul>
             <li>
             <div className="nonTweet">
+            <Link 
+            to="/"
+            style={{textDecoration:"none", color:"inherit"}}
+            >
                 <HomeOutlinedIcon/>
                 Home
+            </Link>
+                
             </div>
             </li>
             <li>
@@ -35,8 +42,12 @@ const LeftBar = () => {
             </li>
             <li>
             <div className="nonTweet" >
-                <Person2Icon/>
-                Profile
+                <Link 
+                to={`/profile/${currentUser.id}`}
+                style={{textDecoration:"none", color:"inherit"}}>
+                    <Person2Icon/>
+                    Profile
+                </Link>
             </div>
             
             </li>
