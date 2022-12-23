@@ -1,0 +1,80 @@
+@import "../../style.scss";
+
+.extrathread{
+    @include themify($themes){
+       
+        .container{
+            border-bottom: 1.2px solid lightgrey;
+            border-left: 1.2px solid lightgrey;
+            border-right: 1.2px solid lightgrey;
+            padding: 15px;
+    
+            .user{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+    
+                .userInfo{
+                    
+                    display: flex;
+                    gap: 20px;
+    
+                    .info {
+                        flex-direction: column;
+                    }
+                    img{
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+    
+                    .details{
+                        display: flex;
+                        align-items: center;
+
+                        .name{
+                            font-weight: 500
+                        }
+                        .date{
+                            padding-left: 2em;
+                            font-size: 12px;
+                        }
+    
+                    }
+    
+                }
+    
+            }
+
+            .content{
+                margin: 20px 0;
+
+                img{
+                    width: 100%;
+                    border-radius: 3%;
+                    max-height: 500px;
+                    object-fit: cover;
+                    margin-top: 20px;
+                }
+                
+            }
+
+            .info{
+                display: flex;
+                align-items: center;
+                gap: 100px;
+
+                .item{
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                    cursor: pointer;
+                }
+            }
+
+            
+        }
+    }
+    
+}
