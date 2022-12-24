@@ -8,11 +8,11 @@ const Profile = () => {
     return (
         <div className="profile">
             <div className="images">
-                <img src="https://supersaiyanshop.b-cdn.net/wp-content/uploads/2020/03/The-Hyperbolic-Spirit-and-time-room-1024x576-1.png"
+                <img src={currentUser.cover}
                     alt=""
                     className="cover"
                 />
-                <img src="https://sportshub.cbsistatic.com/i/2022/11/15/82c5a65f-9edc-434d-9265-4f39aac44912/spy-x-family-71-anya-hostage-crisis-twist-manga.jpg"
+                <img src={currentUser.profilePic}
                     alt=""
                     className="profilePic"
                 />

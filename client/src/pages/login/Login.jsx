@@ -1,5 +1,5 @@
 import "./login.scss"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../context/authContext";
 import { useContext, useState } from "react";
 import Home from "../home/Home";
@@ -13,6 +13,7 @@ const Login = () => {
 
     const [err, setErr] = useState(null)
 
+    const navigate = useNavigate()
 
     const handleChange = e =>{
         setInputs(prev=>({...prev, [e.target.name]:e.target.value}))
@@ -24,11 +25,13 @@ const Login = () => {
         e.preventDefault()
         try{
             await login(inputs);
+            navigate("/")
         }catch(err){
-            setErr(err.response)
+            setErr(err.response.data);
         }
         
-    }
+    };
+
     return (
         <div className="login">
             <div className="card">
@@ -48,8 +51,8 @@ const Login = () => {
                 <div className="right">
                     <h1>Login</h1>
                     <form>
-                        <input type="text" placeholder="Username" onChange={ handleChange }/>
-                        <input type="password" placeholder="Password" onChange={ handleChange }/>
+                        <input type="text" placeholder="Username" name="username" onChange={ handleChange }/>
+                        <input type="password" placeholder="Password" name="password" onChange={ handleChange }/>
                         {err && err}
                         <button onClick={handleLogin}>Login</button>
                     </form>

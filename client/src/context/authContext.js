@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({children}) =>{
     const [currentUser, setCurrentUser] = useState(
-        localStorage.getItem("user") || "poo" //To prevent the state from returning as a string we need to use JSON.parse
+        JSON.parse(localStorage.getItem("user")) || null //To prevent the state from returning as a string we need to use JSON.parse
     );
 
     const login = async (inputs) =>{
