@@ -8,7 +8,7 @@ const Profile = () => {
     return (
         <div className="profile">
             <div className="images">
-                <img src={currentUser.cover}
+                <img src={currentUser.coverPic}
                     alt=""
                     className="cover"
                 />

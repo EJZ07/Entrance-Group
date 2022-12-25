@@ -11,9 +11,9 @@ const Login = () => {
         password:"",
     })
 
-    const [err, setErr] = useState(null)
+    const [err, setErr] = useState(null);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleChange = e =>{
         setInputs(prev=>({...prev, [e.target.name]:e.target.value}))

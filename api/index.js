@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 const app = Express();
 
 //middlewares 
+app.use(cookieParser())
 app.use((req, res, next)=>{
     res.header("Access-Control-Allow-Credentials", true)
     next()
@@ -19,7 +20,8 @@ app.use(
         origin: "http://localhost:3000",
     })
 );
-app.use(cookieParser())
+
+
 
 app.use("/api/users", userRoutes)
 app.use("/api/tweets", tweetRoutes)
