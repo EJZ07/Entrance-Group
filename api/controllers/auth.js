@@ -43,13 +43,13 @@ export const login = (req, res)=>{
         // console.log(token);
         const {password, ...others} = data[0];
         
-        localStorage.setItem('accessToken', token); 
+        
     
-        res.cookie("accessToken", token, {sameSite:"Strict",} ).status(200).json(others);
+        res.cookie("accessToken", token, {
+            httpOnly:true,
+        } ).status(200).json(others);
 
-        
-        
-
+    localStorage.setItem('accessToken', token); 
         // console.log(`this is the cookie awesome ${req.cookies.accessToken}`);
     })
 }
@@ -62,41 +62,3 @@ export const logout = (req, res)=>{
     }).status(200).json("User has been logged out!")
 }
 
-export const getTweets = (req, res)=>{
-   
-    
-    console.log("DOES IT WORK???: ", localStorage.getItem('accessToken') )
-    const token = req.cookies;
-    console.log(token);
-    // if(!token) return res.status(401).json("Not logged in!");
-
-    const q = `SELECT t.*, u.id AS userId, name, profilePic FROM tweets AS t JOIN users AS u ON (u.id = t.userId)
-    ORDER BY t.createdAt DESC`; //the id of t and u would have a conflict so we use u.id AS userId
-
-    db.query(q, [], (err, data)=>{
-        if (err) return res.status(500).json(err);
-        return res.status(200).json(data);
-    });
-
-    // jwt.verify(token, "secretkey", (err, userInfo)=>{ 
-    //     if(err) return res.status(403).json("Token is not valid!")
-
-       
-    // });
-    
-}
-
-export const addTweet = (req, res) =>{
-    const q = `INSERT INTO tweets ("desc", "img", "createdAt", "userId") VALUES ?`; 
-    
-    const values = [
-        req.body.desc,
-        req.body.img,
-        moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-    ]//the id of t and u would have a conflict so we use u.id AS userId
-
-    db.query(q, [], (err, data)=>{
-        if (err) return res.status(500).json(err);
-        return res.status(200).json(data);
-    });
-}

@@ -1,9 +1,9 @@
 import express from "express";
-import  {getTweets, addTweet} from "../controllers/auth.js";
+import  {getTweets, addTweet} from "../controllers/tweet.js";
 
 const router = express.Router()
 
 router.get("/", getTweets)
-router.get("/", addTweet)
+router.post("/", addTweet)
 
 export default router

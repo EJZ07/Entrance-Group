@@ -4,7 +4,9 @@
     position: sticky;
     top: 30px;
     height: calc(100vh - 70px);
+    
     ul{
+        z-index: -200;
         list-style-type: none;
         padding-top: 20px;
         li{

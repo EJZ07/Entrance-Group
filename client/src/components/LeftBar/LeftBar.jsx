@@ -8,12 +8,17 @@ import { useContext } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { AuthContext } from "../../context/authContext";
 import { Link } from "react-router-dom";
+import {useState} from 'react';
+import Compose from "../compose/Compose";
 
 const LeftBar = () => {
     const {toggle, darkMode} = useContext(DarkModeContext);
     const { currentUser} = useContext(AuthContext);
+    const [composePopup, setComposePopup] = useState(false);
     return (
         <div className="leftbar">
+        <Compose trigger={composePopup} setTrigger={setComposePopup}/>
+
         <ul>
             <li>
             <div className="nonTweet">
@@ -52,9 +57,10 @@ const LeftBar = () => {
             
             </li>
             <li>
-            <div className="tweet">
+            <div className="tweet" onClick={() => setComposePopup(true)}>
                 <button>Tweet</button>
             </div>
+            
             
             </li>
             <li>

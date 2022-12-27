@@ -21,10 +21,10 @@ const Login = () => {
 
     const {login} = useContext(AuthContext);
 
-    const handleLogin = async (e)=>{
+    const handleLogin = async e =>{
         e.preventDefault()
         try{
-            await login(inputs);
+            await login(inputs); //await
             navigate("/")
         }catch(err){
             setErr(err.response.data);

@@ -8,7 +8,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 4;
+    z-index: 200;
 
     .compose-inner {
         position: relative;
@@ -86,8 +86,9 @@
             padding-bottom: 10em;
             display: flex;
             justify-content: space-between;
-            gap: 20px;
+            gap: 2px;
             margin: 20px 0px;
+            
 
             img{
                 width: 40px;
@@ -102,9 +103,16 @@
                 border: none;
                 font-size: 25px;
                 box-sizing: border-box;
+                
             }
 
             
+        }
+
+        .attachments{
+            border-TOP: 1.2px solid lightgrey;
+            padding: 15px;
+            padding-left: 20px;
         }
 
         .send{
