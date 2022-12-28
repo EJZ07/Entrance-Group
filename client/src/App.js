@@ -16,14 +16,15 @@ import Navbar from "./components/navbar/Navbar";
 import {useContext} from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
+import { TweetContext } from "./context/tweetContext";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Thread from "./components/thread/Thread";
 
 function App() {
 
   const {currentUser} = useContext(AuthContext);
-
   const {darkMode} = useContext(DarkModeContext);
+  const {setTweeter} = useContext(TweetContext);
 
   const queryClient = new QueryClient()
   console.log(currentUser);

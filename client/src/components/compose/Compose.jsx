@@ -52,6 +52,8 @@ function Compose(props) {
         if(file) imgUrl = await upload();
         mutation.mutate({desc, img: imgUrl})
         props.setTrigger(false)
+        setDesc("")
+        setFile(null)
     }
 
     return (props.trigger) ? (
@@ -65,12 +67,22 @@ function Compose(props) {
                 </div>
                 {props.children}
                 
-                <div className="write">
-                    <img src={currentUser.profilePic} alt=""/>
-                    <input type="text" placeholder={`write a tweet ${currentUser.name}?`} 
-                    onChange={(e)=>setDesc(e.target.value)}/>
+                <div className="top">
+                    <div className="write">
+                        <img src={currentUser.profilePic} alt=""/>
+                        <input type="text" placeholder={`write a tweet ${currentUser.name}?`} 
+                        onChange={(e)=>setDesc(e.target.value)}
+                        value={desc} 
+                        />
                     
+                    </div>
+                    <div className="imgSec">
+                        {file && <img className="preview" alt="" src={URL.createObjectURL(file)}/>}
+                    </div>
                 </div>
+
+                
+                
 
                 <div className="place">
                     <input type="file" id="file" style={{display:"none"}} onChange={(e) => setFile(e.target.files[0])} />

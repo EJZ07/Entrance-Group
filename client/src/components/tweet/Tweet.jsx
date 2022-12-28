@@ -9,13 +9,35 @@ import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import RestartAltOutlinedIcon from '@mui/icons-material/RestartAltOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
+import { useContext } from "react";
+import { TweetContext } from "../../context/tweetContext";
+
+import moment from "moment";
 
 const Tweet = ({tweet}) => {
+    const [err, setErr] = useState(null);
     const [composePopup, setComposePopup] = useState(false);
+    const [threadOpen, setThreadOpen] = useState(false);
+    const {setTweeter} = useContext(TweetContext);
+
+
+    // const handleTweet = (tweetId)=>{
+    //     console.log("EXECUTE");
+        
+    //     try{
+            
+    //      setTweeter(tweetId); //await
+    
+    //     }catch(err){
+    //         setErr(err.response.data);
+    //     }
+        
+    // };
     //TEMPORARY
     const liked = false;
     return (
         <div className="tweet">
+        
         <div className="container" >
             <div className="user">
                 <div className="userInfo">
@@ -28,17 +50,18 @@ const Tweet = ({tweet}) => {
                         <span className="name">{tweet.name}</span>
                         
                         </Link>
-                        <span className="date"> . 1h</span>
+                        <span className="date"> {moment(tweet.createdAt).fromNow()}</span>
                     </div>
                     
                 </div>
                 <MoreHorizOutlinedIcon/>
             </div>
-            <Link to={`:${tweet.userId}/comments/:${tweet.id}`}
+            <Link 
+             to={`:${tweet.userId}/comments/:${tweet.id}`}
               style={{textDecoration:"none", color:"inherit"}}
-              
+              onClick={() => setTweeter(tweet.id)}
             >
-             <div className="content">
+             <div className="content" onClick={() => setThreadOpen(!threadOpen)}>
                 <p>{tweet.desc}</p>
                 <img src={"./upload/" + tweet.img} alt=""/>
              </div>
@@ -86,6 +109,7 @@ const Tweet = ({tweet}) => {
 
                 </div>
              </div>
+             {threadOpen && <Thread tweetId={tweet.id}/>}
             </div>
             
         </div>

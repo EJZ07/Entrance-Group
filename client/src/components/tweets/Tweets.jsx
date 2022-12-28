@@ -1,7 +1,7 @@
 import "./tweets.scss"
 import Tweet from "../tweet/Tweet";
 import { useQuery } from '@tanstack/react-query';
-import { makeRequest} from "../../axios";
+import { makeRequest } from "../../axios";
 import axios from "axios";
 
 const Tweets = () => {
