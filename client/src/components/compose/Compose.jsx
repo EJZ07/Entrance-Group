@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/authContext";
 import {createContext, useEffect, useState} from "react";
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import axios from "axios";
+import makeRequest  from "../../axios";
 
 function Compose(props) {
     const [file, setFile] = useState(null)
@@ -15,8 +16,11 @@ function Compose(props) {
     const upload = async ()=>{
         try{
             const formData = new FormData();
-            formData.append("file", file)
-            const res = axios.post("http://localhost:8800/api/upload", formData)
+            formData.append("file", file);
+            console.log("DataImg", formData.data);
+            // const res = await axios.post("http://localhost:8800/api/upload", formData)
+            const res = await makeRequest.post("/upload", formData)
+            
             return res.data
         }catch(err){
             console.log(err)
@@ -30,7 +34,8 @@ function Compose(props) {
 
     const mutation = useMutation((newTweet)=> {
         try{
-            axios.post("http://localhost:8800/api/tweets", newTweet)
+            return makeRequest.post("/tweets", newTweet)
+            // axios.post("http://localhost:8800/api/tweets", newTweet)
         }catch(err){
             setErr(err.response.data);
         }
@@ -41,11 +46,11 @@ function Compose(props) {
         },
       })
 
-    const handleClick = async e =>{
+    const handleClick = async (e) =>{
         e.preventDefault()
         let imgUrl = "";
         if(file) imgUrl = await upload();
-        mutation.mutate({desc})
+        mutation.mutate({desc, img: imgUrl})
         props.setTrigger(false)
     }
 
@@ -67,9 +72,16 @@ function Compose(props) {
                     
                 </div>
 
-                <div className="attachments">
-                    <ImageOutlinedIcon onClick={(e) => setFile(e.target.files[0])}/>
+                <div className="place">
+                    <input type="file" id="file" style={{display:"none"}} onChange={(e) => setFile(e.target.files[0])} />
+                    <label htmlFor="file">
+                    
+                        <div className="attachments">
+                            <ImageOutlinedIcon />
+                        </div>
+                    </label>
                 </div>
+
 
                 <button className="send" onClick={handleClick}>Reply</button> 
             

@@ -11,10 +11,15 @@ const app = Express();
 
 //middlewares 
 app.use(cookieParser())
+app.use((req, res, next)=>{
+    res.header("Access-Control-Allow-Credentials", true)
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000")
+    next()
+})
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '/client/public/upload')
+      cb(null, '../client/public/upload') //C:\Users\ecozi\Documents\Experess_TakeHome\client\public\upload
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + file.originalname)
@@ -28,16 +33,13 @@ app.post("/api/upload", upload.single("file"), (req, res) =>{
     res.status(200).json(file.filename)
 })
 
-app.use((req, res, next)=>{
-    res.header("Access-Control-Allow-Credentials", true)
-    next()
-})
-app.use(Express.json())
+app.use(Express.json()) //Order of where the cors middleware goes is important
 app.use(
     cors({
         origin: "http://localhost:3000",
     })
 );
+
 
 app.use("/api/users", userRoutes)
 app.use("/api/tweets", tweetRoutes)

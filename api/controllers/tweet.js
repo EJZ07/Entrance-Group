@@ -5,7 +5,6 @@ import localStorage from 'localStorage';
 
 export const getTweets = (req, res)=>{
      
-    console.log("DOES IT WORK???: ", localStorage.getItem('accessToken') )
     const token = localStorage.getItem('accessToken');
     if(!token) return res.status(401).json("Not logged in!");
 
@@ -27,7 +26,7 @@ export const getTweets = (req, res)=>{
 
 
 export const addTweet = (req, res) =>{
-    console.log("DOES IT WORK???: ", localStorage.getItem('accessToken') )
+   
     const token = localStorage.getItem('accessToken');
     if(!token) return res.status(401).json("Not logged in!");
 

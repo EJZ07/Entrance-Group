@@ -40,7 +40,7 @@ const Tweet = ({tweet}) => {
             >
              <div className="content">
                 <p>{tweet.desc}</p>
-                <img src={tweet.img} alt=""/>
+                <img src={"./upload/" + tweet.img} alt=""/>
              </div>
              </Link>
              <div className="info" >
