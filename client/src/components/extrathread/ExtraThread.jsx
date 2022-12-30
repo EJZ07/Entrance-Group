@@ -10,12 +10,49 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import RestartAltOutlinedIcon from '@mui/icons-material/RestartAltOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import moment from "moment";
+import {useMutation, useQueryClient, useQuery} from '@tanstack/react-query';
+import { makeRequest } from "../../axios";
+import { AuthContext } from "../../context/authContext";
+import { useContext } from "react";
 
 const ExtraThread = ({reply}) => {
     const [replyOpen, setReplyOpen] = useState(false);
     const [composePopup, setComposePopup] = useState(false);
     const liked = false;
-    console.log("./upload/" + reply.img)
+    const {currentUser} = useContext(AuthContext);
+    
+    const { isLoading, error, data } = useQuery(["likes", reply.id], async () =>
+
+       await makeRequest.get("/likes?tweetId=" + reply.id).then((res) => {
+            return res.data;
+            
+                
+        })
+
+        // axios.get("http://localhost:8800/api/likes?tweetId="+tweet.id).then((res) => { //Call axios directly because the makeRequest.get gets the client side endpoint
+        //     return res.data;
+        // })
+     );
+
+    const queryClient = useQueryClient()
+
+    const mutation = useMutation((liked)=> {
+        if(liked)
+            return makeRequest.delete("/likes?tweetId="+ reply.id)
+        return makeRequest.post("/likes", {tweetId : reply.id})
+        // axios.post("http://localhost:8800/api/tweets", newTweet)
+        
+    }, {
+        onSuccess: () => {
+          // Invalidate and refetch
+          queryClient.invalidateQueries(["likes"]);
+        },
+      })
+
+     const handleLike = () =>{
+        mutation.mutate(data.includes(currentUser.id))
+     }
+  
     return (
         <div className="extrathread">
            
@@ -43,7 +80,7 @@ const ExtraThread = ({reply}) => {
             >
             <div className="content">
                 <p>{reply.desc}</p>
-                <img src={"./upload/"+reply.img} alt="Mountain"/>
+                <img src={"./upload/"+reply.img} alt=""/>
             </div>
             </Link>
         <div className="info">
@@ -81,7 +118,12 @@ const ExtraThread = ({reply}) => {
 
             </div>
             <div className="item">
-                {liked ? <FavoriteOutlinedIcon style={{color:"red"}}/> : <FavoriteBorderOutlinedIcon/>} 1.1k
+            {isLoading ? "loading" : data.includes(currentUser.id) ? 
+                    (<FavoriteOutlinedIcon style={{color:"red"}} onClick={handleLike}/> ) : 
+
+                    (<FavoriteBorderOutlinedIcon  onClick={handleLike}/>
+                    )} 
+                    {/* {data.length && data.length} */}
 
             </div>
             <div className="item">
