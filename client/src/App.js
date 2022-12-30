@@ -78,10 +78,6 @@ function App() {
           path:":id/comments/:tid",
           element: <Thread/>
         },
-        {
-          path:"/profile/:id/:id/comments/:tid",
-          element: <Thread/>
-        },
       ]   
 
     },

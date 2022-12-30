@@ -2,8 +2,8 @@ import "./thread.scss"
 import { Link }from "react-router-dom";
 import { TweetContext } from "../../context/tweetContext";
 import {AuthContext} from "../../context/authContext"
-import { useContext } from "react";
-import { useQuery } from '@tanstack/react-query';
+import { useContext, useState } from "react";
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import makeRequest  from "../../axios";
 import ExtraThread from "../extrathread/ExtraThread";
 
@@ -12,11 +12,12 @@ const Thread = ({tweetId}) => {
     var state = true;
     console.log("Tweet Id: Thread", tweetId);
     const {currentUser} = useContext(AuthContext);
-    const {currentTweeter} = useContext(TweetContext);
+    const {currentTweeter} = useContext(TweetContext); 
 
     const { isLoading, error, data } = useQuery(["comments"], () =>
 
         makeRequest.get("/comments?tweetId="+currentTweeter).then((res) => {
+            console.log(res.data[0]);
             return res.data;
         })
 
@@ -24,8 +25,6 @@ const Thread = ({tweetId}) => {
         //     return res.data;
         // })
      );
-
-     console.log("Data retreived", data);
     
 
     const liked = false;

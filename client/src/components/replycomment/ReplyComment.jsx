@@ -1,9 +1,10 @@
-import "./compose.scss";
+import "./replycomment.scss";
 import React from "react";
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ImageOutlinedIcon from '@mui/icons-material/ImageOutlined';
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
+import { TweetContext } from "../../context/tweetContext";
 import {createContext, useEffect, useState} from "react";
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import axios from "axios";
@@ -12,6 +13,7 @@ import makeRequest  from "../../axios";
 function Compose(props) {
     const [file, setFile] = useState(null)
     const [desc, setDesc] = useState("")
+    const {currentTweeter} = useContext(TweetContext); 
 
     const upload = async ()=>{
         try{
@@ -32,9 +34,9 @@ function Compose(props) {
 
     const queryClient = useQueryClient()
 
-    const mutation = useMutation((newTweet)=> {
+    const mutation = useMutation((newComment)=> {
         try{
-            return makeRequest.post("/tweets", newTweet)
+            return makeRequest.post("/comments", newComment)
             // axios.post("http://localhost:8800/api/tweets", newTweet)
         }catch(err){
             setErr(err.response.data);
@@ -42,7 +44,7 @@ function Compose(props) {
     }, {
         onSuccess: () => {
           // Invalidate and refetch
-          queryClient.invalidateQueries(["tweets"]);
+          queryClient.invalidateQueries(["comments"]);
         },
       })
 
@@ -50,7 +52,7 @@ function Compose(props) {
         e.preventDefault()
         let imgUrl = "";
         if(file) imgUrl = await upload();
-        mutation.mutate({desc, img: imgUrl})
+        mutation.mutate({desc, img: imgUrl, tweetId: currentTweeter})
         props.setTrigger(false)
         setDesc("")
         setFile(null)
@@ -63,7 +65,7 @@ function Compose(props) {
                     <CloseOutlinedIcon onClick={() => props.setTrigger(false)}/>
                 </div>
                 <div className="title">
-                    <h3>Compose Tweet</h3>
+                    <h3>Say Something Back</h3>
                 </div>
                 {props.children}
                 
@@ -95,7 +97,7 @@ function Compose(props) {
                 </div>
 
 
-                <button className="send" onClick={handleClick}>Send</button> 
+                <button className="send" onClick={handleClick}>Reply</button> 
             
             
             </div>
